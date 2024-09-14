@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import Menu from "@/components/Menu";
-import PageWrapper from "@/components/PageWrapper";
+// import PageWrapper from "@/components/PageWrapper";
 import Wrapper from "@/components/Wrapper";
 
 export const metadata = {
@@ -13,10 +13,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <PageWrapper>
-          <Menu />
-          <Wrapper>{children}</Wrapper>
-        </PageWrapper>
+        <Menu />
+        <Wrapper>{children}</Wrapper>
       </body>
     </html>
   );

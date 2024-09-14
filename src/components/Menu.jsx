@@ -1,11 +1,13 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { animatePageOut } from "@/utils/animation";
+import TransitionLink from "./TransitionLink";
 
 const menuItems = [
   {
@@ -52,15 +54,15 @@ const Menu = () => {
       tl.current = gsap
         .timeline({ pause: true })
         .to("#menu-overlay", {
-          duration: 0.2,
+          duration: 0.5,
           clipPath: "polygon(0% 0%, 100% 0, 100% 100%, 0% 100%)",
-          ease: "sine.inOut",
+          ease: "power2.inOut",
         })
         .to(".menu-links-item-holder", {
           y: 0,
           duration: 0.3,
-          stagger: 0.1,
-          ease: "expo.out",
+          stagger: 0.2,
+          ease: "none",
         })
         .to(
           Array.from(socialMediaLinks.current.children), // Ubah menjadi array untuk animasi
@@ -89,7 +91,7 @@ const Menu = () => {
             autoAlpha: 1, // Tampilkan info
             duration: 0.1,
             stagger: 0.1, // Delay berurutan untuk setiap info
-            ease: "power2.inOut",
+            ease: "expo.out",
           }
         );
     },
@@ -117,11 +119,6 @@ const Menu = () => {
     gsap.set(".menu-info-cop", { y: 35, autoAlpha: 0 });
     gsap.set(".menu-info-sos", { y: 35, autoAlpha: 0 });
   }, []);
-
-  if (!pathname) {
-    console.error("Pathname not found");
-    return null; // Berikan fallback jika pathname tidak ada
-  }
 
   return (
     <>
@@ -172,21 +169,15 @@ const Menu = () => {
                     onClick={toggleMenu}
                     className="menu-links-item-holder relative"
                   >
-                    <Link
+                    <TransitionLink
                       href={item?.path}
-                      key={i}
-                      className="px-1 md:px-2 text-[calc(1.8em+1vw)] md:text-[calc(3em+1vw)]  leading-[115%] tracking-[-0.08em] uppercase"
-                    >
-                      <span
-                        className={`  ${
-                          pathname === item?.path
-                            ? "text-white delay-1000 font-extrabold sd_text"
-                            : "delay-1000 text-[#141414]"
-                        }`}
-                      >
-                        {item?.label}
-                      </span>
-                    </Link>
+                      label={item?.label}
+                      className={`px-1 md:px-2 text-[calc(1.8em+1vw)] md:text-[calc(3em+1vw)]  leading-[115%] tracking-[-0.08em] uppercase  ${
+                        pathname === item?.path
+                          ? "text-white delay-1000 font-extrabold sd_text"
+                          : "delay-1000 text-[#141414]"
+                      }`}
+                    />
                   </div>
                 </div>
               ))}
