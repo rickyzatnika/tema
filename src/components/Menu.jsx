@@ -60,9 +60,9 @@ const Menu = () => {
         })
         .to(".menu-links-item-holder", {
           y: 0,
-          duration: 0.3,
+          duration: 0.8,
           stagger: 0.2,
-          ease: "none",
+          ease: "power2.inOut",
         })
         .to(
           Array.from(socialMediaLinks.current.children), // Ubah menjadi array untuk animasi
@@ -134,15 +134,19 @@ const Menu = () => {
               className="w-50 h-50 object-contain"
             />
           </Link>
-          <button onClick={toggleMenu} className="text-md">
-            MENU
-          </button>
+          {isOpen === true ? (
+            ""
+          ) : (
+            <button onClick={toggleMenu} className="text-md">
+              MENU
+            </button>
+          )}
         </div>
         <div
           id="menu-overlay"
           className="fixed top-0 left-0 w-screen h-screen py-[1em] px-[2em] flex flex-wrap  bg-gradient-to-tr from-[#00B8F4] to-[#A0E0F0] z-20 clip_2"
         >
-          <div className="menu-overlay-bar fixed top-0 left-0 w-screen p-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-10">
+          <div className="menu-overlay-bar fixed top-0 left-0 w-screen p-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-20">
             <Link onClick={toggleMenu} href="/">
               <Image
                 src="/logo.png"
