@@ -1,14 +1,24 @@
 "use client";
 
+import { useCursor } from "@/context/CursorContext";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function ScrollSection() {
+  const {
+    handleCursorHover,
+    isHover,
+    handleElementMove,
+    position,
+    buttonPositions,
+  } = useCursor();
+
   const sectionRefs = useRef([]); // Ref untuk menyimpan section
   const containerRef = useRef(null); // Ref untuk container
   const currentIndex = useRef(0); // Untuk melacak section saat ini
+  const buttonRefs = useRef([]);
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -27,21 +37,47 @@ function ScrollSection() {
 
       scrollTrigger: {
         trigger: container,
-        start: "top top",
+        start: "top left",
         end: () => "+=" + totalWidth,
-        scrub: 2,
+        scrub: 0.1,
         pin: true,
+
         snap: {
           snapTo: 1 / (sections.length - 1),
-          duration: 1, // Durasi snap transisi
+          duration: 0.3,
+          ease: "none",
         },
       },
     });
+
+    let ctx = gsap.context(() => {
+      const t1 = gsap.timeline();
+      t1.from("#section-1", {
+        duration: 1.3,
+        xPercent: "-100",
+        ease: "power2.inOut",
+        delay: 1,
+      })
+        .from(["#title-1", "#title-2"], {
+          opacity: 0,
+          y: "50",
+          duration: 1,
+          stagger: 0.5,
+        })
+        .to(["#title-1", "#title-2"], {
+          opacity: 1,
+          y: "10",
+          duration: 1,
+          delay: 0.3,
+          stagger: 0.5,
+        });
+    }, container);
 
     return () => {
       // Bersihkan ScrollTrigger dan tween GSAP
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       containerTween.kill();
+      ctx.revert();
     };
   }, []);
 
@@ -72,51 +108,150 @@ function ScrollSection() {
     }
   };
 
+  useEffect(() => {
+    if (buttonRefs.current.length > 0) {
+      buttonRefs.current.forEach((btn) => {
+        if (btn) {
+          const sensitivity = 0.8; // Sensitivitas pergerakan, coba sesuaikan
+          const xDiff =
+            position.x - btn.getBoundingClientRect().left - btn.offsetWidth / 2;
+          const yDiff =
+            position.y - btn.getBoundingClientRect().top - btn.offsetHeight / 2;
+          if (isHover && btn.id === position.elementId) {
+            // Hitung jarak antara posisi kursor dan posisi tombol
+
+            // Terapkan transformasi dengan sensitivitas kecil
+            btn.style.transform = `translate3d(${xDiff * sensitivity}px, ${
+              yDiff * sensitivity
+            }px, 0)`;
+            btn.style.transition = "transform 0.3s ease-out"; // Transisi yang halus
+            btn.style.color = "black";
+          } else {
+            // Reset posisi tombol jika tidak di-hover
+            btn.style.transform = `translate3d(0, 0, 0)`;
+            btn.style.transition = "transform 0.2s ease-out"; // Transisi yang halus
+            btn.style.color = "white";
+          }
+        }
+      });
+    }
+  }, [position, isHover, buttonPositions]);
+
+  const handleMouseEnter = (e) => {
+    handleCursorHover(true, e.currentTarget.id); // Update elementId saat hover
+    handleElementMove({
+      x: e.clientX,
+      y: e.clientY,
+      elementId: e.currentTarget.id,
+    });
+  };
+
+  const handleMouseLeave = (e) => {
+    handleCursorHover(false, e.currentTarget.id); // Update elementId saat hover keluar
+    handleElementMove({
+      x: e.clientX,
+      y: e.clientY,
+      elementId: e.currentTarget.id,
+    });
+  };
+
   return (
-    <section className="overflow-hidden relative">
+    <section className="overflow-hidden relative cursor-none">
       {/* Container utama untuk ScrollTrigger */}
       <div
         ref={containerRef}
         className="scroll-smooth w-[400vw] h-screen flex relative"
       >
         <div
+          id="section-1"
           ref={(el) => (sectionRefs.current[0] = el)}
-          className="text-white w-screen h-screen flex items-center justify-center bg-red-200"
+          className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
         >
-          <h3>Section 1</h3>
+          <h3
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            id="title-1"
+            className="text-white text-4xl"
+          >
+            Section 1
+          </h3>
+          <p id="title-2" className="text-md">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
         </div>
         <div
+          id="section-2"
           ref={(el) => (sectionRefs.current[1] = el)}
-          className="text-white w-screen h-screen flex items-center justify-center bg-blue-200"
+          className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
         >
-          <h3>Section 2</h3>
+          <h3
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            id="title-1"
+            className="text-white text-4xl"
+          >
+            Section 2
+          </h3>
+          <p id="title-2" className="text-md">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
         </div>
         <div
+          id="section-3"
           ref={(el) => (sectionRefs.current[2] = el)}
-          className="text-white w-screen h-screen flex items-center justify-center bg-purple-200"
+          className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
         >
-          <h3>Section 3</h3>
+          <h3
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            id="title-1"
+            className="text-white text-4xl"
+          >
+            Section 3
+          </h3>
+          <p id="title-2" className="text-md">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
         </div>
         <div
+          id="section-4"
           ref={(el) => (sectionRefs.current[3] = el)}
-          className="text-white w-screen h-screen flex items-center justify-center bg-pink-200"
+          className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
         >
-          <h3>Section 4</h3>
+          <h3
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            id="title-1"
+            className="text-white text-4xl"
+          >
+            Section 4
+          </h3>
+          <p id="title-2" className="text-md">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
         </div>
       </div>
 
       <div className="flex fixed gap-4 bottom-8 left-8 w-full">
         <button
+          id="button-prev"
+          ref={(el) => (buttonRefs.current[0] = el)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           onClick={handlePrev}
-          className="p-4 bg-gray-100/20 backdrop-blur-sm antialiased text-[#111111] rounded-full"
+          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased text-[#111111] rounded-full"
         >
-          <IoIosArrowBack size={30} />
+          <IoIosArrowBack size={26} />
         </button>
         <button
+          id="button-next"
+          ref={(el) => (buttonRefs.current[1] = el)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           onClick={handleNext}
-          className="p-4 bg-gray-100/20 backdrop-blur-sm antialiased text-[#111111] rounded-full"
+          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased text-[#111111] rounded-full"
         >
-          <IoIosArrowForward size={30} />
+          <IoIosArrowForward size={26} />
         </button>
       </div>
     </section>

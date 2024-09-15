@@ -6,8 +6,8 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { animatePageOut } from "@/utils/animation";
 import TransitionLink from "./TransitionLink";
+import { useCursor } from "@/context/CursorContext";
 
 const menuItems = [
   {
@@ -37,11 +37,36 @@ const Menu = () => {
   const containerRef = useRef();
   const tl = useRef();
   const [isOpen, setIsOpen] = useState(false);
-
+  const {
+    handleCursorHover,
+    handleElementMove,
+    isHover,
+    position,
+    buttonPositions,
+  } = useCursor();
   const socialMediaLinks = useRef();
+  const buttonRefs = useRef([]);
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleMouseEnter = (e) => {
+    handleCursorHover(true, e.currentTarget.id); // Update elementId saat hover
+    handleElementMove({
+      x: e.clientX,
+      y: e.clientY,
+      elementId: e.currentTarget.id,
+    });
+  };
+
+  const handleMouseLeave = (e) => {
+    handleCursorHover(false, e.currentTarget.id); // Update elementId saat hover keluar
+    handleElementMove({
+      x: e.clientX,
+      y: e.clientY,
+      elementId: e.currentTarget.id,
+    });
   };
 
   useGSAP(
@@ -120,11 +145,44 @@ const Menu = () => {
     gsap.set(".menu-info-sos", { y: 35, autoAlpha: 0 });
   }, []);
 
+  useEffect(() => {
+    if (buttonRefs.current.length > 0) {
+      buttonRefs.current.forEach((btn) => {
+        if (btn) {
+          const sensitivity = 0.6; // Sensitivitas pergerakan, coba sesuaikan
+          const xDiff =
+            position.x - btn.getBoundingClientRect().left - btn.offsetWidth / 2;
+          const yDiff =
+            position.y - btn.getBoundingClientRect().top - btn.offsetHeight / 2;
+          if (isHover && btn.id === position.elementId) {
+            // Hitung jarak antara posisi kursor dan posisi tombol
+
+            // Terapkan transformasi dengan sensitivitas kecil
+            btn.style.transform = `translate3d(${xDiff * sensitivity}px, ${
+              yDiff * sensitivity
+            }px, 0)`;
+            btn.style.transition = "transform 0.2s ease-out"; // Transisi yang halus
+          } else {
+            // Reset posisi tombol jika tidak di-hover
+            btn.style.transform = `translate3d(0, 0, 0)`;
+            btn.style.transition = "transform 0.2s ease-out"; // Transisi yang halus
+          }
+        }
+      });
+    }
+  }, [position, isHover, buttonPositions]);
+
   return (
     <>
       <div ref={containerRef} className="menu-container ">
         <div className="menu-bar fixed top-0 left-0 w-screen py-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-10">
-          <Link href="/">
+          <Link
+            id="button-logo"
+            ref={(el) => (buttonRefs.current[0] = el)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            href="/"
+          >
             <Image
               src="/logo.png"
               alt="logo"
@@ -137,7 +195,14 @@ const Menu = () => {
           {isOpen === true ? (
             ""
           ) : (
-            <button onClick={toggleMenu} className="text-md">
+            <button
+              id="button-menu"
+              ref={(el) => (buttonRefs.current[1] = el)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onClick={toggleMenu}
+              className="text-md"
+            >
               MENU
             </button>
           )}
@@ -147,7 +212,14 @@ const Menu = () => {
           className="fixed top-0 left-0 w-screen h-screen py-[1em] px-[2em] flex flex-wrap  bg-gradient-to-tr from-[#00B8F4] to-[#A0E0F0] z-20 clip_2"
         >
           <div className="menu-overlay-bar fixed top-0 left-0 w-screen p-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-20">
-            <Link onClick={toggleMenu} href="/">
+            <Link
+              id="button-logo"
+              ref={(el) => (buttonRefs.current[2] = el)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onClick={toggleMenu}
+              href="/"
+            >
               <Image
                 src="/logo.png"
                 alt="logo"
@@ -158,6 +230,10 @@ const Menu = () => {
               />
             </Link>
             <button
+              id="button-close"
+              ref={(el) => (buttonRefs.current[3] = el)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               onClick={toggleMenu}
               className="menu-close-icon text-white sd_text font-bold flex flex-2 items-end justify-end text-md  "
             >

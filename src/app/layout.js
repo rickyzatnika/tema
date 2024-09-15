@@ -1,8 +1,10 @@
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 import Menu from "@/components/Menu";
 // import PageWrapper from "@/components/PageWrapper";
 import Wrapper from "@/components/Wrapper";
+import { CursorProvider } from "@/context/CursorContext";
 
 export const metadata = {
   title: "Tema Indonesia",
@@ -13,8 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <Menu />
-        <Wrapper>{children}</Wrapper>
+        <CursorProvider>
+          <Menu />
+          <CustomCursor />
+          <Wrapper>{children}</Wrapper>
+        </CursorProvider>
       </body>
     </html>
   );

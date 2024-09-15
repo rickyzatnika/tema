@@ -6,6 +6,12 @@
   display: none !important;
 }
 
+::selection {
+  background-color: transparent;
+}
+
+
+
 body {
   background-color: #121315;
   color: #fafafa;
