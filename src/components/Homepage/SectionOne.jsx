@@ -99,7 +99,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
       <div className="absolute top-0 left-0 w-screen h-full bg-gradient-to-t via-black/20 from-black to-transparent z-30" />
       <div
         id="section-1"
-        className="w-screen h-screen absolute top-0 left-0 z-0"
+        className="w-screen h-screen absolute top-0 left-0 z-0 "
       >
         <IKImage
           urlEndpoint={urlEndpoint}
@@ -113,8 +113,9 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
         <Image
           src="/object.png"
           alt="bg"
-          fill
-          className="object-cover "
+          width={1200}
+          height={1200}
+          className="object-cover w-full h-full "
           priority={true}
         />
       </div>
@@ -132,10 +133,10 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
         />
       </div>
 
-      <div className="relative z-30 mt-14 top-6 lg:top-20 w-full h-full flex gap-4 flex-col items-center justify-center">
+      <div className="relative z-30 mt-14 top-6 lg:top-20 w-full h-full flex gap-4 flex-col items-center justify-center overflow-hidden">
         <h3
           id="title"
-          className="text-transparent bg-clip-text bg-gradient-to-bl from-[#d83939]  to-[#00ff00] text-2xl lg:text-5xl font-bold whitespace-nowrap"
+          className="text-transparent bg-clip-text bg-gradient-to-br from-[#36ff58]  to-[#ffd000] text-3xl lg:text-5xl font-extrabold text-center"
         >
           JEGEL <span>&</span> RIGEN GERRR!
         </h3>
@@ -143,109 +144,123 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
 
         <div
           id="text-animate"
-          className="w-screen bg-[#C5B593]/20 flex items-center py-4 px-8 overflow-hidden"
+          className="absolute bottom-32 lg:bottom-1/3 left-0  bg-[#C5B593]/20 flex items-center py-4 px-2 lg:px-4 overflow-hidden"
         >
-          <h3 className="text-4xl font-bold align-end flex whitespace-nowrap pr-2">
+          <h3 className="text-2xl hidden lg:flex  font-bold align-end whitespace-nowrap pr-2">
             GUEST STAR :{" "}
           </h3>
-          <div id="locomotive-text" className="flex overflow-hidden">
+          <div
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            id="locomotive-text"
+            className="w-screen flex overflow-hidden"
+          >
             <div
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className={` text-group flex  ${isHover ? "hover-effect" : ""}`}
+              className={` text-group flex text-xl items-center ${
+                isHover ? "hover-effect" : ""
+              }`}
             >
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 indro warkop -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 ernest prakasa -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 andre taulany -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 raditya dika -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 ekooju -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 R7 -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 ge pamungkas -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 arie kriting -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 jonathan liandi -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 onad -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 livy renata -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 vonzy -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 catheez -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 siskaeee -
-              </p>
-              <p className="uppercase antialiased text-3xl font-semibold whitespace-nowrap pr-3">
-                Many More...
               </p>
             </div>
 
             {/* Duplikasi teks untuk membuat efek seamless scrolling */}
-            <div className="text-group flex whitespace-nowrap">
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                indro warkop
+            <div className="text-group flex items-center text-xl whitespace-nowrap">
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                indro warkop -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                ernest prakasa
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                ernest prakasa -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                andre taulany
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                andre taulany -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                raditya dika
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                raditya dika -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                ekooju
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                ekooju -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                R7
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                R7 -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                ge pamungkas
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                ge pamungkas -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                arie kriting
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                arie kriting -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                jonathan liandi
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                jonathan liandi -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                onad
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                onad -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                livy renata
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                livy renata -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                vonzy
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                vonzy -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                catheez
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                catheez -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
-                siskaeee
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                siskaeee -
               </p>
-              <p className="uppercase antialiased text-3xl font-semibold pr-3 whitespace-nowrap">
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                indro warkop -
+              </p>
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                ernest prakasa -
+              </p>
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                andre taulany -
+              </p>
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
+                raditya dika -
+              </p>
+              <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
                 Many More...
               </p>
             </div>
