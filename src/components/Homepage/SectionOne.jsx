@@ -133,7 +133,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
         />
       </div>
 
-      <div className="relative z-30 mt-14 top-6 lg:top-20 w-full h-full flex gap-4 flex-col items-center justify-center overflow-hidden">
+      <div className="relative z-30  top-10 lg:top-16 w-full h-full flex gap-4 flex-col items-center justify-center overflow-hidden">
         <h3
           id="title"
           className="text-transparent bg-clip-text bg-gradient-to-br from-[#36ff58]  to-[#ffd000] text-3xl lg:text-5xl font-extrabold text-center"

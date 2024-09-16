@@ -187,14 +187,14 @@ const ScrollSection = () => {
           </p>
         </div> */}
       </div>
-      <div className="flex fixed gap-4 bottom-2 lg:bottom-8 left-8 w-full z-10">
+      <div className="flex fixed gap-4 bottom-3 lg:bottom-8 left-8 w-full z-10">
         <button
           id="button-prev"
           ref={(el) => (buttonRefs.current[0] = el)}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handlePrev}
-          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased text-[#111111] rounded-full"
+          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased rounded-full"
         >
           <IoIosArrowBack size={26} />
         </button>
@@ -204,7 +204,7 @@ const ScrollSection = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handleNext}
-          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased text-[#111111] rounded-full"
+          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased rounded-full"
         >
           <IoIosArrowForward size={26} />
         </button>
