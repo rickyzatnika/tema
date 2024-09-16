@@ -71,7 +71,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           .to(" #text-animate", {
             opacity: 1,
             xPercent: "0",
-            y: "8",
+            y: "15",
             duration: 0.8,
             delay: 0.5,
           });
