@@ -29,15 +29,17 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           })
           .from(" #logo_geger", {
             opacity: 0,
-            y: "25",
-            duration: 1,
-            ease: "bounce",
+            scale: 10,
+            duration: 0.6,
+            ease: "power2.inOut",
           })
           .from(" #title", {
             opacity: 0,
             y: "35",
-            duration: 1,
+            rotate: "0",
+            duration: 0.8,
             ease: "bounce",
+            stagger: 0.5,
           })
           .from(" #text-animate", {
             opacity: 0,
@@ -52,19 +54,19 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           })
           .to("#logo_geger", {
             opacity: 1,
-            y: "0",
+            scale: 1,
             duration: 0.5,
             delay: 0.3,
-            ease: "bounce",
-            stagger: 0.5,
+            ease: "power2.inOut",
           })
           .to("#title", {
             opacity: 1,
             y: "0",
             duration: 0.8,
-            delay: 0.4,
+            delay: 0.1,
+            rotate: "-12",
             ease: "bounce",
-            stagger: 0.5,
+            stagger: 0.2,
           })
           .to(" #text-animate", {
             opacity: 1,
@@ -136,7 +138,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
       <div className="relative z-30  top-10 lg:top-16 w-full h-full flex gap-4 flex-col items-center justify-center overflow-hidden">
         <h3
           id="title"
-          className="text-transparent bg-clip-text bg-gradient-to-br from-[#36ff58]  to-[#ffd000] text-3xl lg:text-5xl font-extrabold text-center"
+          className="relative z-40 origin-center text-transparent bg-clip-text bg-gradient-to-br from-[#36ff58]  to-[#ffd000] text-3xl lg:text-5xl font-extrabold text-center"
         >
           JEGEL <span>&</span> RIGEN GERRR!
         </h3>
