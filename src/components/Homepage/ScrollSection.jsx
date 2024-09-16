@@ -187,7 +187,7 @@ const ScrollSection = () => {
           </p>
         </div> */}
       </div>
-      <div className="flex fixed gap-4 bottom-8 left-8 w-full z-10">
+      <div className="flex fixed gap-4 bottom-2 lg:bottom-8 left-8 w-full z-10">
         <button
           id="button-prev"
           ref={(el) => (buttonRefs.current[0] = el)}
