@@ -71,6 +71,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           .to(" #text-animate", {
             opacity: 1,
             xPercent: "0",
+            y: "8",
             duration: 0.8,
             delay: 0.5,
           });
@@ -135,7 +136,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
         />
       </div>
 
-      <div className="relative z-30  top-4 lg:top-16 w-full h-full flex gap-0 lg:gap-4 flex-col items-center justify-center overflow-hidden">
+      <div className="relative z-30  top-1 lg:top-16 w-full h-full flex gap-0 lg:gap-4 flex-col items-center justify-center overflow-hidden">
         <h3
           id="title"
           className="relative z-40 origin-center text-transparent bg-clip-text bg-gradient-to-br from-[#36ff58]  to-[#ffd000] text-3xl lg:text-5xl font-extrabold text-center"
