@@ -1,5 +1,9 @@
 import ScrollSection from "@/components/Homepage/ScrollSection";
-import React from "react";
+
+export const metadata = {
+  title: "Tema - Home",
+  description: "test",
+};
 
 const HomePage = () => {
   return (

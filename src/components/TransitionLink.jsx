@@ -3,7 +3,13 @@
 import { animatePageOut } from "@/utils/animation";
 import { usePathname, useRouter } from "next/navigation";
 
-const TransitionLink = ({ href, label, className }) => {
+const TransitionLink = ({
+  href,
+  label,
+  className,
+  handleMouseEnter,
+  handleMouseLeave,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -14,7 +20,13 @@ const TransitionLink = ({ href, label, className }) => {
   };
 
   return (
-    <button className={className} href={href} onClick={handleClick}>
+    <button
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+      href={href}
+      onClick={handleClick}
+    >
       {label}
     </button>
   );

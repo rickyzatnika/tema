@@ -7,9 +7,9 @@ const CustomCursor = () => {
 
   return (
     <div
-      className={`custom-cursor fixed pointer-events-none transition-all duration-300 ease-linear ${
+      className={`custom-cursor fixed pointer-events-none transition-all duration-300 ease-linear  ${
         isHover
-          ? " bg-white/40 w-10 h-10 transition-all duration-300 ease-linear"
+          ? "active"
           : "  bg-[#333]/40 backdrop-blur  w-3 h-3  transition-all duration-300 ease-linear"
       }  `}
       style={{

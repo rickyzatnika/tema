@@ -49,24 +49,7 @@ const Menu = () => {
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
-  };
-
-  const handleMouseEnter = (e) => {
-    handleCursorHover(true, e.currentTarget.id); // Update elementId saat hover
-    handleElementMove({
-      x: e.clientX,
-      y: e.clientY,
-      elementId: e.currentTarget.id,
-    });
-  };
-
-  const handleMouseLeave = (e) => {
-    handleCursorHover(false, e.currentTarget.id); // Update elementId saat hover keluar
-    handleElementMove({
-      x: e.clientX,
-      y: e.clientY,
-      elementId: e.currentTarget.id,
-    });
+    handleCursorHover(false);
   };
 
   useGSAP(
@@ -144,6 +127,19 @@ const Menu = () => {
     gsap.set(".menu-info-cop", { y: 35, autoAlpha: 0 });
     gsap.set(".menu-info-sos", { y: 35, autoAlpha: 0 });
   }, []);
+
+  const handleMouseEnter = (e) => {
+    handleCursorHover(true, e.currentTarget.id); // Update elementId saat hover
+    handleElementMove({
+      x: e.clientX,
+      y: e.clientY,
+      elementId: e.currentTarget.id,
+    });
+  };
+
+  const handleMouseLeave = (e) => {
+    handleCursorHover(false, e.currentTarget.id); // Update elementId saat hover keluar
+  };
 
   useEffect(() => {
     if (buttonRefs.current.length > 0) {
@@ -251,12 +247,14 @@ const Menu = () => {
                   >
                     <TransitionLink
                       href={item?.path}
+                      handleMouseEnter={handleMouseEnter}
+                      handleMouseLeave={handleMouseLeave}
                       label={item?.label}
                       className={`px-1 md:px-2 text-[calc(1.8em+1vw)] md:text-[calc(3em+1vw)]  leading-[115%] tracking-[-0.08em] uppercase  ${
                         pathname === item?.path
                           ? "text-white delay-1000 font-extrabold sd_text"
                           : "delay-1000 text-[#141414]"
-                      }`}
+                      } `}
                     />
                   </div>
                 </div>

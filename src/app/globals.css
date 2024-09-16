@@ -3,45 +3,61 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  display: none !important;
+	display: none !important;
 }
 
 ::selection {
-  background-color: transparent;
+	background-color: transparent;
 }
 
 
 
 body {
-  background-color: #121315;
-  color: #fafafa;
+	background-color: #121315;
+	color: #fafafa;
 
 }
+
+.custom-cursor.active {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	background: radial-gradient(circle, rgb(174, 255, 255) 0%, rgba(255, 255, 255, 0) 70%);
+	pointer-events: none;
+	z-index: 50;
+	opacity: 0.7;
+	transition: all 0.5s linear;
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+
+}
+
+
 
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	.text-balance {
+		text-wrap: balance;
+	}
 }
 
 .clip {
-  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .clip_2 {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+	clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 }
 
 .sd_text {
-  text-shadow: 3px 3px 12px #111111a8;
+	text-shadow: 3px 3px 12px #111111a8;
 }
 
 
 @media screen and (max-width: 720px) {
-  .sd_text {
-    text-shadow: 1px 1px 6px #111111a8;
-  }
+	.sd_text {
+		text-shadow: 1px 1px 6px #111111a8;
+	}
 
 }
 
@@ -49,9 +65,9 @@ body {
 
 
 .nav-buttons {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  display: flex;
-  gap: 10px;
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	display: flex;
+	gap: 10px;
 }

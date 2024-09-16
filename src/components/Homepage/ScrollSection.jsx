@@ -1,12 +1,22 @@
 "use client";
 
 import { useCursor } from "@/context/CursorContext";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
-function ScrollSection() {
+import SectionOne from "./SectionOne";
+import SectionTwo from "./SectionTwo";
+import SectionThree from "./SectionThree";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const ScrollSection = () => {
   const {
     handleCursorHover,
     isHover,
@@ -20,66 +30,36 @@ function ScrollSection() {
   const currentIndex = useRef(0); // Untuk melacak section saat ini
   const buttonRefs = useRef([]);
 
-  gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      const container = containerRef.current;
+      const sections = sectionRefs.current;
 
-  useEffect(() => {
-    const container = containerRef.current;
-    const sections = sectionRefs.current;
+      const totalWidth = sections.reduce(
+        (total, section) => total + section.offsetWidth,
+        0
+      );
 
-    const totalWidth = sections.reduce(
-      (total, section) => total + section.offsetWidth,
-      0
-    );
+      gsap.to(container, {
+        x: () => -totalWidth + window.innerWidth,
+        ease: "none",
 
-    const containerTween = gsap.to(container, {
-      x: () => -totalWidth + window.innerWidth,
-      ease: "none",
-
-      scrollTrigger: {
-        trigger: container,
-        start: "top left",
-        end: () => "+=" + totalWidth,
-        scrub: 0.1,
-        pin: true,
-
-        snap: {
-          snapTo: 1 / (sections.length - 1),
-          duration: 0.3,
-          ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          start: "top left",
+          end: () => "+=" + totalWidth,
+          scrub: 1,
+          pin: true,
+          snap: {
+            snapTo: 1 / (sections.length - 1),
+            duration: 0.3,
+            ease: "none",
+          },
         },
-      },
-    });
-
-    let ctx = gsap.context(() => {
-      const t1 = gsap.timeline();
-      t1.from("#section-1", {
-        duration: 1.3,
-        xPercent: "-100",
-        ease: "power2.inOut",
-        delay: 1,
-      })
-        .from(["#title-1", "#title-2"], {
-          opacity: 0,
-          y: "50",
-          duration: 1,
-          stagger: 0.5,
-        })
-        .to(["#title-1", "#title-2"], {
-          opacity: 1,
-          y: "10",
-          duration: 1,
-          delay: 0.3,
-          stagger: 0.5,
-        });
-    }, container);
-
-    return () => {
-      // Bersihkan ScrollTrigger dan tween GSAP
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      containerTween.kill();
-      ctx.revert();
-    };
-  }, []);
+      });
+    },
+    { scope: containerRef }
+  );
 
   const scrollToSection = (index) => {
     if (index >= 0 && index < sectionRefs.current.length) {
@@ -87,9 +67,9 @@ function ScrollSection() {
       const targetX = -index * window.innerWidth; // Hitung posisi berdasarkan lebar layar
       gsap.to(containerRef.current, {
         x: targetX,
+        autoKill: false,
         duration: 0.75,
         ease: "power2.inOut",
-        stagger: 1,
       });
     }
   };
@@ -129,7 +109,7 @@ function ScrollSection() {
           } else {
             // Reset posisi tombol jika tidak di-hover
             btn.style.transform = `translate3d(0, 0, 0)`;
-            btn.style.transition = "transform 0.2s ease-out"; // Transisi yang halus
+            btn.style.transition = "transform 0.3s ease-out";
             btn.style.color = "white";
           }
         }
@@ -156,64 +136,40 @@ function ScrollSection() {
   };
 
   return (
-    <section className="overflow-hidden relative cursor-none">
+    <section className="overflow-y-hidden relative cursor-none">
       {/* Container utama untuk ScrollTrigger */}
-      <div
-        ref={containerRef}
-        className="scroll-smooth w-[400vw] h-screen flex relative"
-      >
+      <div ref={containerRef} className="w-[500vw] h-screen flex relative ">
         <div
-          id="section-1"
           ref={(el) => (sectionRefs.current[0] = el)}
-          className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
+          className="relative text-white w-screen h-screen flex flex-col gap-4 items-center justify-center "
         >
-          <h3
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            id="title-1"
-            className="text-white text-4xl"
-          >
-            Section 1
-          </h3>
-          <p id="title-2" className="text-md">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
+          <SectionOne
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
+            containerRef={containerRef}
+          />
         </div>
         <div
-          id="section-2"
           ref={(el) => (sectionRefs.current[1] = el)}
-          className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
+          className="text-white w-screen h-screen  flex flex-col gap-4 items-center justify-center bg-red-200"
         >
-          <h3
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            id="title-1"
-            className="text-white text-4xl"
-          >
-            Section 2
-          </h3>
-          <p id="title-2" className="text-md">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
+          <SectionTwo
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
+            containerRef={containerRef}
+          />
         </div>
         <div
-          id="section-3"
           ref={(el) => (sectionRefs.current[2] = el)}
           className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
         >
-          <h3
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            id="title-1"
-            className="text-white text-4xl"
-          >
-            Section 3
-          </h3>
-          <p id="title-2" className="text-md">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
+          <SectionThree
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
+            containerRef={containerRef}
+          />
         </div>
-        <div
+        {/* <div
           id="section-4"
           ref={(el) => (sectionRefs.current[3] = el)}
           className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
@@ -229,10 +185,9 @@ function ScrollSection() {
           <p id="title-2" className="text-md">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
-        </div>
+        </div> */}
       </div>
-
-      <div className="flex fixed gap-4 bottom-8 left-8 w-full">
+      <div className="flex fixed gap-4 bottom-8 left-8 w-full z-10">
         <button
           id="button-prev"
           ref={(el) => (buttonRefs.current[0] = el)}
@@ -256,7 +211,7 @@ function ScrollSection() {
       </div>
     </section>
   );
-}
+};
 
 export default ScrollSection;
 

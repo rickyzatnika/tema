@@ -2,7 +2,6 @@ import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 import Menu from "@/components/Menu";
-// import PageWrapper from "@/components/PageWrapper";
 import Wrapper from "@/components/Wrapper";
 import { CursorProvider } from "@/context/CursorContext";
 

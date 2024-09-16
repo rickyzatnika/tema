@@ -1,4 +1,12 @@
 {
-  "editor.fontFamily": "Consolas, 'Courier New', monospace",
-  "editor.fontWeight": "300"
+  "editor.fontFamily": "Fira Code",
+	"editor.fontWeight": "300",
+	"editor.fontSize": 15,
+	"editor.fontLigatures": "true",
+	"editor.lineHeight": 18,
+	"editor.tabSize": 2,
+	"prettier.tabWidth": 2,
+	"editor.letterSpacing": -0.9,
+	"prettier.bracketSpacing": true,
+	"editor.formatOnSave": true
 }

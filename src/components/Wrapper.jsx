@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 const Wrapper = ({ children }) => {
   const pathname = usePathname();
+
   const isHome = pathname === "/";
 
   return (
