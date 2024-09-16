@@ -151,7 +151,7 @@ const ScrollSection = () => {
         </div>
         <div
           ref={(el) => (sectionRefs.current[1] = el)}
-          className="text-white w-screen h-screen  flex flex-col gap-4 items-center justify-center bg-red-200"
+          className="text-white w-screen h-screen relative flex flex-col gap-4 items-center justify-center bg-red-200"
         >
           <SectionTwo
             handleMouseEnter={handleMouseEnter}
