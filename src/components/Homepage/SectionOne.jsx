@@ -4,8 +4,21 @@ import gsap from "gsap";
 import { IKImage } from "imagekitio-next";
 import Image from "next/image";
 import React from "react";
+import { Protest_Guerrilla } from "next/font/google";
+import { Quantico } from "next/font/google";
 
 const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT;
+
+const protes = Protest_Guerrilla({
+  subsets: ["latin"],
+  weight: "400",
+  style: "normal",
+});
+const quantico = Quantico({
+  subsets: ["latin"],
+  weight: "400",
+  style: "normal",
+});
 
 const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
   const { isHover } = useCursor();
@@ -137,10 +150,10 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
         />
       </div>
 
-      <div className="relative z-30  top-1 lg:top-16 w-full h-full flex gap-0 lg:gap-4 flex-col items-center justify-center overflow-hidden">
+      <div className="relative z-30  top-1 lg:top-20 w-full h-full flex gap-0 lg:gap-4 flex-col items-center justify-center overflow-hidden">
         <h3
           id="title"
-          className="relative z-40 origin-center text-transparent bg-clip-text bg-gradient-to-br from-[#36ff58]  to-[#ffd000] text-3xl lg:text-5xl font-extrabold text-center"
+          className={` relative z-40 origin-center text-transparent bg-clip-text bg-gradient-to-br from-[#36ff58]  to-[#ffd000] text-3xl lg:text-5xl font-extrabold text-center  ${protes.className}`}
         >
           JEGEL <span>&</span> RIGEN GERRR!
         </h3>
@@ -150,7 +163,9 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           id="text-animate"
           className="absolute bottom-32 lg:bottom-1/3 left-0  bg-[#C5B593]/20 flex items-center py-4 px-2 lg:px-4 overflow-hidden"
         >
-          <h3 className="text-2xl hidden lg:flex  font-bold align-end whitespace-nowrap pr-2">
+          <h3
+            className={` text-2xl hidden lg:flex  font-bold align-end whitespace-nowrap pr-2 ${protes.className}`}
+          >
             GUEST STAR :{" "}
           </h3>
           <div
@@ -162,7 +177,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
             <div
               className={` text-group flex text-xl items-center ${
                 isHover ? "hover-effect" : ""
-              }`}
+              } ${quantico.className} `}
             >
               <p className="uppercase antialiased  font-semibold pr-3 whitespace-nowrap">
                 indro warkop -
@@ -209,7 +224,11 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
             </div>
 
             {/* Duplikasi teks untuk membuat efek seamless scrolling */}
-            <div className="text-group flex items-center text-xl whitespace-nowrap">
+            <div
+              className={` text-group flex text-xl items-center ${
+                isHover ? "hover-effect" : ""
+              } ${quantico.className} `}
+            >
               <p className="uppercase antialiased font-semibold pr-3 whitespace-nowrap">
                 indro warkop -
               </p>

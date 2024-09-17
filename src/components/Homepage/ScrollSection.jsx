@@ -90,7 +90,7 @@ const ScrollSection = () => {
     if (buttonRefs.current.length > 0) {
       buttonRefs.current.forEach((btn) => {
         if (btn) {
-          const sensitivity = 0.8; // Sensitivitas pergerakan, coba sesuaikan
+          const sensitivity = 1; // Sensitivitas pergerakan, coba sesuaikan
           const xDiff =
             position.x - btn.getBoundingClientRect().left - btn.offsetWidth / 2;
           const yDiff =
@@ -102,13 +102,13 @@ const ScrollSection = () => {
             btn.style.transform = `translate3d(${xDiff * sensitivity}px, ${
               yDiff * sensitivity
             }px, 0)`;
-            btn.style.transition = "transform 0.3s ease-out"; // Transisi yang halus
-            btn.style.color = "black";
+            btn.style.transition = "transform 0.2s ease-out"; // Transisi yang halus
+            btn.style.color = "white";
           } else {
             // Reset posisi tombol jika tidak di-hover
             btn.style.transform = `translate3d(0, 0, 0)`;
-            btn.style.transition = "transform 0.3s ease-out";
-            btn.style.color = "white";
+            btn.style.transition = "transform 0.2s ease-out";
+            btn.style.color = "teal";
           }
         }
       });
@@ -152,7 +152,6 @@ const ScrollSection = () => {
           className="text-white w-screen h-screen relative  "
         >
           <SectionTwo
-            id="section-2"
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
             containerRef={containerRef}
@@ -193,7 +192,7 @@ const ScrollSection = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handlePrev}
-          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased rounded-full"
+          className="p-4 lg:p-6 text-black btn-section shadow-md backdrop-blur-sm antialiased rounded-full"
         >
           <IoIosArrowBack size={26} />
         </button>
@@ -203,7 +202,7 @@ const ScrollSection = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handleNext}
-          className="p-3 bg-gray-100/20 shadow-md backdrop-blur-sm antialiased rounded-full"
+          className="p-4 lg:p-6 text-black btn-section shadow-md backdrop-blur-sm antialiased rounded-full"
         >
           <IoIosArrowForward size={26} />
         </button>

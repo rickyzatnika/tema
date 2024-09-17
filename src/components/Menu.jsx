@@ -8,6 +8,20 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import TransitionLink from "./TransitionLink";
 import { useCursor } from "@/context/CursorContext";
+import { Quantico } from "next/font/google";
+import { Protest_Guerrilla } from "next/font/google";
+
+const quantico = Quantico({
+  subsets: ["latin"],
+  weight: "400",
+  style: "normal",
+});
+
+const protes = Protest_Guerrilla({
+  subsets: ["latin"],
+  weight: "400",
+  style: "normal",
+});
 
 const menuItems = [
   {
@@ -171,7 +185,7 @@ const Menu = () => {
   return (
     <>
       <div ref={containerRef} className="menu-container ">
-        <div className="menu-bar fixed top-0 left-0 w-screen py-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-10">
+        <div className="menu-bar cursor-none fixed top-0 left-0 w-screen py-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-10">
           <Link
             id="button-logo"
             ref={(el) => (buttonRefs.current[0] = el)}
@@ -197,7 +211,7 @@ const Menu = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={toggleMenu}
-              className="text-md"
+              className={`cursor-none sd_text text-lg ${quantico.className}`}
             >
               MENU
             </button>
@@ -207,7 +221,7 @@ const Menu = () => {
           id="menu-overlay"
           className="fixed top-0 left-0 w-screen h-screen py-[1em] px-[2em] flex flex-wrap  bg-gradient-to-tr from-[#00B8F4] to-[#A0E0F0] z-20 clip_2"
         >
-          <div className="menu-overlay-bar fixed top-0 left-0 w-screen p-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-20">
+          <div className="menu-overlay-bar cursor-none fixed top-0 left-0 w-screen p-[1em] px-[1em] md:px-[2em] flex justify-between items-center z-20">
             <Link
               id="button-logo"
               ref={(el) => (buttonRefs.current[2] = el)}
@@ -231,7 +245,7 @@ const Menu = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={toggleMenu}
-              className="menu-close-icon text-white sd_text font-bold flex flex-2 items-end justify-end text-md  "
+              className={` menu-close-icon cursor-none text-white sd_text font-bold flex flex-2 items-end justify-end text-lg ${quantico.className}`}
             >
               CLOSE
             </button>
@@ -250,11 +264,11 @@ const Menu = () => {
                       handleMouseEnter={handleMouseEnter}
                       handleMouseLeave={handleMouseLeave}
                       label={item?.label}
-                      className={`px-1 md:px-2 text-[calc(2.2em+1vw)] md:text-[calc(3em+1vw)]  leading-[115%] tracking-[-0.08em] uppercase  ${
+                      className={`px-1 md:px-2 text-[calc(2.2em+1vw)] md:text-[calc(3em+1vw)]  leading-[115%] tracking-[-0.03em] uppercase  ${
                         pathname === item?.path
                           ? "text-white delay-1000 font-extrabold sd_text"
-                          : "delay-1000 text-[#141414]"
-                      } `}
+                          : " text-[#141414] hover:text-white"
+                      } ${protes.className} `}
                     />
                   </div>
                 </div>
@@ -268,8 +282,17 @@ const Menu = () => {
                 TEMA INDONESIA © 2024
               </span>
               <div className="flex flex-col gap-2 ">
-                <p className="menu-info-cop text-left md:text-center">
-                  follow <span className="font-bold text-xl font-serif">&</span>{" "}
+                <p
+                  id="title-sm"
+                  ref={(el) => (buttonRefs.current[4] = el)}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  className="menu-info-cop text-left md:text-center"
+                >
+                  follow{" "}
+                  <span className="font-bold cursor-none pointer-events-none text-xl font-serif">
+                    &
+                  </span>{" "}
                   subscribe
                 </p>
                 <div
@@ -277,7 +300,13 @@ const Menu = () => {
                   ref={socialMediaLinks}
                   className="flex-4 flex flex-row flex-wrap gap-2 md:gap-4 "
                 >
-                  <Link href="">
+                  <Link
+                    id="button-ig"
+                    ref={(el) => (buttonRefs.current[5] = el)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    href=""
+                  >
                     <Image
                       src="/ig.png"
                       alt="instagram"
@@ -286,7 +315,13 @@ const Menu = () => {
                       className="w-8 h-8 md:w-10 md:h-10 opacity-80 hover:opacity-100"
                     />
                   </Link>
-                  <Link href="">
+                  <Link
+                    id="button-fb"
+                    ref={(el) => (buttonRefs.current[6] = el)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    href=""
+                  >
                     <Image
                       src="/fb.png"
                       alt="youtube"
@@ -295,16 +330,28 @@ const Menu = () => {
                       className="w-8 h-8 md:w-10 md:h-10 opacity-80 hover:opacity-100"
                     />
                   </Link>
-                  <Link href="">
+                  <Link
+                    id="button-in"
+                    ref={(el) => (buttonRefs.current[7] = el)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    href=""
+                  >
                     <Image
                       src="/in.png"
-                      alt="youtube"
+                      alt="linkdin"
                       width={20}
                       height={20}
                       className="w-8 h-8 md:w-10 md:h-10 opacity-80 hover:opacity-100"
                     />
                   </Link>
-                  <Link href="">
+                  <Link
+                    id="button-yt"
+                    ref={(el) => (buttonRefs.current[8] = el)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    href=""
+                  >
                     <Image
                       src="/yt.png"
                       alt="youtube"

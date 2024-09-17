@@ -1,6 +1,3 @@
-import { useCursor } from "@/context/CursorContext";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { IKImage } from "imagekitio-next";
 import Image from "next/image";
 

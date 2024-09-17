@@ -10,7 +10,7 @@ const CustomCursor = () => {
       className={`custom-cursor hidden lg:block fixed pointer-events-none transition-all duration-300 ease-linear  ${
         isHover
           ? "active"
-          : "  bg-[#333]/40 backdrop-blur  w-3 h-3  transition-all duration-300 ease-linear"
+          : "  bg-[#fff]/70 backdrop-blur-[3px]  w-4 h-4 transition-all duration-300 ease-linear"
       }  `}
       style={{
         left: `${position.x}px`,
