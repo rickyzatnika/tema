@@ -11,8 +11,7 @@ const SectionThree = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           urlEndpoint={urlEndpoint}
           path="tema.mp4"
           width={2200}
-          height={700}
-          transformation={[{ height: 200, width: 200 }]}
+          height={1200}
           controls={false}
           autoPlay={true}
           muted={true}
