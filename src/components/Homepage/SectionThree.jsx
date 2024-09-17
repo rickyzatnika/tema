@@ -12,7 +12,7 @@ const SectionThree = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           path="tema.mp4"
           width={2200}
           height={700}
-          transformation={[{ height: 700, width: 1000 }]}
+          transformation={[{ height: 200, width: 200 }]}
           controls={false}
           autoPlay={true}
           muted={true}
