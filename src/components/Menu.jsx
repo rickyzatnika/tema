@@ -264,7 +264,7 @@ const Menu = () => {
                       handleMouseEnter={handleMouseEnter}
                       handleMouseLeave={handleMouseLeave}
                       label={item?.label}
-                      className={`px-1 md:px-2 text-[calc(2.2em+1vw)] md:text-[calc(3em+1vw)]  leading-[115%] tracking-[-0.03em] uppercase  ${
+                      className={`px-1 md:px-2 text-[calc(2.6em+1vw)] md:text-[calc(3em+1vw)]  leading-[115%] tracking-[-0.03em] uppercase  ${
                         pathname === item?.path
                           ? "text-white delay-1000 font-extrabold sd_text"
                           : " text-[#141414] hover:text-white"
