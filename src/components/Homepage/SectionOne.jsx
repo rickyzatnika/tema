@@ -109,6 +109,7 @@ const SectionOne = ({ containerRef, handleMouseEnter, handleMouseLeave }) => {
           path="bg.jpg"
           fill
           priority={true}
+          alt="background"
           className="object-cover "
         />
       </div>

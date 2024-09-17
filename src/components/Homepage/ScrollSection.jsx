@@ -12,9 +12,7 @@ import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
 import SectionThree from "./SectionThree";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 const ScrollSection = () => {
   const {
@@ -30,36 +28,36 @@ const ScrollSection = () => {
   const currentIndex = useRef(0); // Untuk melacak section saat ini
   const buttonRefs = useRef([]);
 
-  useGSAP(
-    () => {
-      const container = containerRef.current;
-      const sections = sectionRefs.current;
+  useEffect(() => {
+    const container = containerRef.current;
+    const sections = sectionRefs.current;
 
-      const totalWidth = sections.reduce(
-        (total, section) => total + section.offsetWidth,
-        0
-      );
+    const totalWidth = sections.reduce(
+      (total, section) => total + section.offsetWidth,
+      0
+    );
 
-      gsap.to(container, {
-        x: () => -totalWidth + window.innerWidth,
-        ease: "none",
+    const scl = gsap.to(container, {
+      x: () => -totalWidth + window.innerWidth,
+      ease: "none",
 
-        scrollTrigger: {
-          trigger: container,
-          start: "top left",
-          end: () => "+=" + totalWidth,
-          scrub: 1,
-          pin: true,
-          snap: {
-            snapTo: 1 / (sections.length - 1),
-            duration: 0.3,
-            ease: "none",
-          },
+      scrollTrigger: {
+        trigger: container,
+        start: "top left",
+        end: () => "+=" + totalWidth,
+        scrub: 1,
+        pin: true,
+        snap: {
+          snapTo: 1 / (sections.length - 1),
+          duration: 0.3,
+          ease: "none",
         },
-      });
-    },
-    { scope: containerRef }
-  );
+      },
+    });
+    return () => {
+      scl.kill();
+    };
+  }, []);
 
   const scrollToSection = (index) => {
     if (index >= 0 && index < sectionRefs.current.length) {
@@ -141,7 +139,7 @@ const ScrollSection = () => {
       <div ref={containerRef} className="w-[500vw] h-screen flex relative ">
         <div
           ref={(el) => (sectionRefs.current[0] = el)}
-          className="relative text-white w-screen h-screen flex flex-col gap-4 items-center justify-center "
+          className="relative text-white w-screen h-screen  "
         >
           <SectionOne
             handleMouseEnter={handleMouseEnter}
@@ -151,9 +149,10 @@ const ScrollSection = () => {
         </div>
         <div
           ref={(el) => (sectionRefs.current[1] = el)}
-          className="text-white w-screen h-screen relative flex flex-col gap-4 items-center justify-center bg-red-200"
+          className="text-white w-screen h-screen relative  "
         >
           <SectionTwo
+            id="section-2"
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
             containerRef={containerRef}
@@ -161,7 +160,7 @@ const ScrollSection = () => {
         </div>
         <div
           ref={(el) => (sectionRefs.current[2] = el)}
-          className="text-white w-screen h-screen flex flex-col gap-4 items-center justify-center bg-red-200"
+          className="text-white w-screen h-screen relative "
         >
           <SectionThree
             handleMouseEnter={handleMouseEnter}
